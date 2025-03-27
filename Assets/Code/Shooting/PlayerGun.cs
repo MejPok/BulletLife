@@ -20,8 +20,6 @@ public class PlayerGun : MonoBehaviour
         shootToUse.action.performed += Aim;
 
         counter = GetComponent<BulletCounter>();
-
-
     }
     void Update()
     {
@@ -43,7 +41,6 @@ public class PlayerGun : MonoBehaviour
 
         float angle = Mathf.Atan2(shotPosition.y, shotPosition.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        
     }
 
     void Aim(UnityEngine.InputSystem.InputAction.CallbackContext context){
