@@ -38,9 +38,13 @@ public class PlayerGun : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * 20;
-
+        
+        bullet.transform.rotation = CalculateAngle();
+    }
+    
+    Quaternion CalculateAngle(){
         float angle = Mathf.Atan2(shotPosition.y, shotPosition.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        return Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     void Aim(UnityEngine.InputSystem.InputAction.CallbackContext context){
