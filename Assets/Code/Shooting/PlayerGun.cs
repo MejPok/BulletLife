@@ -36,8 +36,9 @@ public class PlayerGun : MonoBehaviour
             return;
         }
 
-        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * 20;
+        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity); //Create bullet
+        
+        bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * bullet.BulletSpeed;
         
         bullet.transform.rotation = CalculateAngle();
     }
