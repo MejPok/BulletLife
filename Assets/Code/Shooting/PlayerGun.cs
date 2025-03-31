@@ -24,8 +24,6 @@ public class PlayerGun : MonoBehaviour
         
 
         counter = GetComponent<BulletCounter>();
-
-
     }
     void Update()
     {
