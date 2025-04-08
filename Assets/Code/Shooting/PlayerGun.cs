@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+
 
 public class PlayerGun : MonoBehaviour
 {
@@ -10,16 +12,19 @@ public class PlayerGun : MonoBehaviour
     public InputActionReference shootToUse;
     public Vector2 shotPosition;
     public GameObject bulletPrefab;
-    LineTrajectory trajectory;
+    public LineTrajectory trajectory;
     public BulletCounter counter;
-    ChargeShooting CS;
+    public ChargeShooting CS;
 
     public UnityEvent<int> bulletShots;
 
     public bool chargeIsReady;
 
+    [SerializeReference]public List<ScriptableBulletBase> shootingBehaviours;
+
     void Start()
     {
+
         shootToUse.action.canceled += Shoot;
         shootToUse.action.performed += Aim;
         CS = GetComponent<ChargeShooting>();
@@ -33,32 +38,8 @@ public class PlayerGun : MonoBehaviour
     }
 
     void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext callback){
-        if(!counter.EnoughBullets()){
-            trajectory.EndLine();
-            return;
-        }
-
-        if(Mathf.Abs(shotPosition.x) +  Mathf.Abs(shotPosition.y) <= 0.3f){
-            return;
-        }
-
-        if(chargeIsReady){
-            chargeIsReady = false;
-            CS.Shoot();
-            return;
-        }
-
-        trajectory.EndLine();
-
-        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * 20;
-
-        float angle = Mathf.Atan2(shotPosition.y, shotPosition.x) * Mathf.Rad2Deg;
-        bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        bulletShots.Invoke(1);
-
-        SoundManager.Instance.PlaySoundFX(GetComponent<FXchoser>().audioClips[0], transform, 1);
+        shootingBehaviours[0].getRef(this);
+        shootingBehaviours[0].CreateBullet(shotPosition);
         
     }
 
@@ -74,4 +55,7 @@ public class PlayerGun : MonoBehaviour
         trajectory.StartLine();
     }
 
+    public GameObject InstantiateFromHere(GameObject prefab, Vector3 trans){
+        return Instantiate(prefab, trans, Quaternion.identity);
+    }
 }
