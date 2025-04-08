@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbea5cecc26a8c40866136dcf36776e, type: 3}
-  m_Name: NormalBullet
+  m_Script: {fileID: 11500000, guid: bd0b84f2a6a74fb44acf6cc6a7cc23d2, type: 3}
+  m_Name: FireCharge
   m_EditorClassIdentifier: 
   Cost: 0
-  bulletPrefab: {fileID: 6372086746248428252, guid: 4f9c050a46cb1a04597405a6a45e4dc6, type: 3}
-  dependableCharged: {fileID: 11400000, guid: 344fc8a336b158e4eb690e8d3b492c84, type: 2}
+  bulletPrefab: {fileID: 8806096707296727448, guid: 50fda05abf294a74980e91334cfa3fa4, type: 3}
+  dependableCharged: {fileID: 0}
+  AoeRange: 2
+  AoeDamage: 20

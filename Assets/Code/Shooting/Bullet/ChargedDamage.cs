@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class ChargedDamage : MonoBehaviour
 {
+    public int damage = 20;
     public float range = 3f;
+
+
     void OnTriggerEnter2D(Collider2D other){
         if(other.gameObject.tag == "Enemy" || other.gameObject.tag == "Wall"){
             if(other.gameObject.GetComponent<EnemyHP>() == null){
@@ -19,7 +22,7 @@ public class ChargedDamage : MonoBehaviour
 
             foreach(var col in colliders){
                 if(col.gameObject.GetComponent<EnemyHP>() != null){
-                    col.gameObject.GetComponent<EnemyHP>().ReduceHP(20);
+                    col.gameObject.GetComponent<EnemyHP>().ReduceHP(damage);
                 }
             }
                 

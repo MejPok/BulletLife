@@ -3302,7 +3302,9 @@ MonoBehaviour:
   shootToUse: {fileID: 4350829172424337631, guid: 5fb93c63e3d914b498d08f628c96281b, type: 3}
   shotPosition: {x: 0, y: 0}
   bulletPrefab: {fileID: 6372086746248428252, guid: 4f9c050a46cb1a04597405a6a45e4dc6, type: 3}
+  trajectory: {fileID: 0}
   counter: {fileID: 0}
+  CS: {fileID: 0}
   bulletShots:
     m_PersistentCalls:
       m_Calls:
@@ -3319,6 +3321,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   chargeIsReady: 0
+  shootingBehaviours:
+  - {fileID: 11400000, guid: 6b5e2c5599c18ea4f96762332663f686, type: 2}
 --- !u!114 &1641198290
 MonoBehaviour:
   m_ObjectHideFlags: 0

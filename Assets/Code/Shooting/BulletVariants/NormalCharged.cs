@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[CreateAssetMenu(menuName = "Bullets/Normal Bullet")]
-public class NormalBulletBehaviour : ScriptableBulletBase
+[CreateAssetMenu(menuName = "Bullets/FireCharge Bullet")]
+public class FireCharge : ScriptableBulletBase
 {
+    public float AoeRange;
     public override void CreateBullet(Vector2 shotPosition)
     {
         if(!gun.counter.EnoughBullets(Cost)){
@@ -22,17 +22,28 @@ public class NormalBulletBehaviour : ScriptableBulletBase
             return;
         }
 
+
         gun.trajectory.EndLine();
 
-        GameObject bullet = gun.InstantiateFromHere(bulletPrefab, gun.shootPoint.position);
-        bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * 20;
+        SoundManager.Instance.PlaySoundFX(gun.GetComponent<FXchoser>().audioClips[0], gun.transform, 1);
+
+        gun.bulletShots.Invoke(Cost);
+        
+
+        Debug.Log("shoot charged");
+
+        
+        var bullet = gun.InstantiateFromHere(bulletPrefab, gun.shootPoint.position);
+
+        bullet.GetComponent<Rigidbody2D>().velocity = gun.shotPosition * 10;
+        var damager = bullet.GetComponent<ChargedDamage>();
+
+        damager.range = AoeRange;
+        damager.damage = Damage;
 
         float angle = Mathf.Atan2(shotPosition.y, shotPosition.x) * Mathf.Rad2Deg;
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-        gun.bulletShots.Invoke(Cost);
-
-        SoundManager.Instance.PlaySoundFX(gun.GetComponent<FXchoser>().audioClips[0], gun.transform, 1);
+        
     }
 
     public override void OnJoyStickAim(InputAction.CallbackContext callback)
@@ -44,7 +55,5 @@ public class NormalBulletBehaviour : ScriptableBulletBase
     {
         throw new System.NotImplementedException();
     }
-
-
+    
 }
-

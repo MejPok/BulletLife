@@ -50,31 +50,6 @@ public class ChargeShooting : MonoBehaviour
         currentChargeTime = 0f;
         chargeUI.ResetChargeUI();
     }
-
-    public void Shoot(){
-
-        if(PG.counter.EnoughBullets(Cost)){
-            PG.bulletShots.Invoke(Cost);
-        } else {
-            return;
-        }
-
-        Debug.Log("shoot charged");
-
-        if(chargedBulletPrefab != null){
-            var bullet = Instantiate(chargedBulletPrefab, (Vector3)transform.position, Quaternion.identity);
-
-            bullet.GetComponent<Rigidbody2D>().velocity = PG.shotPosition * 10;
-            bullet.GetComponent<ChargedDamage>().range = ChargeDamageRange;
-
-            float angle = Mathf.Atan2(PG.shotPosition.y, PG.shotPosition.x) * Mathf.Rad2Deg;
-            bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
-
-        }
-
-        
-    }
     
 
 

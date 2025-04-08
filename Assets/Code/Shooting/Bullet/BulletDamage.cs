@@ -10,7 +10,6 @@ public class BulletDamage : MonoBehaviour
     void Start()
     {
         damage = Math.Max((int)GetComponent<Rigidbody2D>().velocity.magnitude - 15, 1);
-        
     }
 
     void OnTriggerEnter2D(Collider2D other){
