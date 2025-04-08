@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class GlobalManager : MonoBehaviour
 {
-    public static GlobalManager globalManager { get; private set; }
+    public static GlobalManager Instance { get; private set; }
     public GameObject Player;
+    public GameObject Gun;
 
     void Start()
     {
-        globalManager = this;
+        Instance = this;
     }
     
 }

@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             if(counter.BulletsLeft > 0) canMove = true;
         }
         
-
+        Debug.Log("" + canMove);
         if(canMove){
             rb.MovePosition((Vector2)transform.position + (direction * Time.deltaTime * speed));
         }

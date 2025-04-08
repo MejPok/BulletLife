@@ -11,17 +11,18 @@ public class PlayerGun : MonoBehaviour
     public Vector2 shotPosition;
     public GameObject bulletPrefab;
     LineTrajectory trajectory;
-    BulletCounter counter;
+    public BulletCounter counter;
+    ChargeShooting CS;
 
     public UnityEvent<int> bulletShots;
 
-    bool chargeIsReady;
-    ChargeUI chargeUI;
+    public bool chargeIsReady;
+
     void Start()
     {
         shootToUse.action.canceled += Shoot;
         shootToUse.action.performed += Aim;
-        
+        CS = GetComponent<ChargeShooting>();
 
         counter = GetComponent<BulletCounter>();
     }
@@ -37,12 +38,17 @@ public class PlayerGun : MonoBehaviour
             return;
         }
 
-        trajectory.EndLine();
-
         if(Mathf.Abs(shotPosition.x) +  Mathf.Abs(shotPosition.y) <= 0.3f){
-            
             return;
         }
+
+        if(chargeIsReady){
+            chargeIsReady = false;
+            CS.Shoot();
+            return;
+        }
+
+        trajectory.EndLine();
 
         GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, Quaternion.identity);
         bullet.GetComponent<Rigidbody2D>().velocity = shotPosition * 20;
@@ -51,6 +57,8 @@ public class PlayerGun : MonoBehaviour
         bullet.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         bulletShots.Invoke(1);
+
+        SoundManager.Instance.PlaySoundFX(GetComponent<FXchoser>().audioClips[0], transform, 1);
         
     }
 

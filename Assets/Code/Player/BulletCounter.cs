@@ -18,7 +18,7 @@ public class BulletCounter : MonoBehaviour
         set {
             if(value < 0){
                  bulletsLeft = 0; 
-
+                InvokeCounterEmpty();
                  return;
             }
 
@@ -33,15 +33,17 @@ public class BulletCounter : MonoBehaviour
 
     void Start()
     {
-        bulletsLeft = MaxBullets;
+        BulletsLeft = MaxBullets;
+        OnBulletsChange();
     }
     
     public void DecreaseBullets(int amount){
-        if(BulletsLeft - amount <= 0){
-            InvokeCounterEmpty();
-            return;
-        }
         BulletsLeft -= amount;
+        SoundManager.Instance.PlaySoundFX(GetComponent<FXchoser>().audioClips[1], transform, 1);
+        Debug.Log("player hit");
+        if(BulletsLeft <= 0){
+            InvokeCounterEmpty();
+        }
 
         
     }
@@ -57,6 +59,10 @@ public class BulletCounter : MonoBehaviour
         UImanager.uImanager.UpdateCounterText(BulletsLeft);
     }
     
+    public void Add(int amount = 1){
+        if(BulletsLeft + amount > MaxBullets){ return;}
+        BulletsLeft += amount;
+    }
 
 
 
