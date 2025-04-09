@@ -21,6 +21,7 @@ public class PlayerGun : MonoBehaviour
     public bool chargeIsReady;
 
     [SerializeReference]public List<ScriptableBulletBase> shootingBehaviours;
+    public ScriptableBulletBase currentBulletType;
 
     void Start()
     {
@@ -30,16 +31,20 @@ public class PlayerGun : MonoBehaviour
         CS = GetComponent<ChargeShooting>();
 
         counter = GetComponent<BulletCounter>();
+
+        foreach(var type in GlobalManager.Instance.allBulletTypes){
+            shootingBehaviours.Add(Instantiate(type));
+        }
+        
     }
     void Update()
     {
         shotPosition = shootToUse.action.ReadValue<Vector2>();
-
     }
 
     void Shoot(UnityEngine.InputSystem.InputAction.CallbackContext callback){
-        shootingBehaviours[0].getRef(this);
-        shootingBehaviours[0].CreateBullet(shotPosition);
+        currentBulletType.getRef(this);
+        currentBulletType.CreateBullet(shotPosition);
         
     }
 

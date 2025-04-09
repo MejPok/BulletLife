@@ -5,13 +5,18 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
     Rigidbody2D rb;
+    BulletCounter counter;
+
+    [Header("Movement Parameters")]
     public Vector2 movement;
     public float speed = 20;
     public bool canMove = true;
-    BulletCounter counter;
 
     public InputActionReference moveActionToUse;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,19 +29,34 @@ public class PlayerMovement : MonoBehaviour
     {
         MoveMyPlayer(movement);
     }
-    void MoveMyPlayer(Vector2 direction){
-        if(counter != null){
-            if(counter.BulletsLeft > 0) canMove = true;
-        }
-        
-        Debug.Log("" + canMove);
-        if(canMove){
-            rb.MovePosition((Vector2)transform.position + (direction * Time.deltaTime * speed));
-        }
+
+    void MoveMyPlayer(Vector2 direction)
+    {
+        if (counter != null && counter.BulletsLeft > 0)
+            canMove = true;
+
+        if (canMove)
+            rb.velocity = FinalMovement();
+        else
+            rb.velocity = Vector2.zero;
+    }
+
+    [Header("Knockback Parameters")]
+    public float knockbackDecay;
+    public Vector2 knockback;
+    Vector2 FinalMovement(){
+
+        knockback = Vector2.Lerp(knockback, Vector2.zero, Time.fixedDeltaTime * knockbackDecay);
+        return movement * speed + knockback;
+
     }
 
     public void StopMovementBullets(BulletCounter counter){
         this.counter = counter;
         canMove = false;
+    }
+
+    public void AddForceToPlayer(Vector2 direction, float force){
+        knockback = -direction * force;
     }
 }

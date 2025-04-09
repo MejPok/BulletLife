@@ -11,6 +11,7 @@ public class ScriptableBulletBase : ScriptableObject
     protected PlayerGun gun;
     public GameObject bulletPrefab;
     public ScriptableBulletBase dependableCharged;
+    ScriptableBulletBase TempDependableCharged;
 
     public void getRef(PlayerGun gun){
         this.gun = gun;
@@ -18,10 +19,12 @@ public class ScriptableBulletBase : ScriptableObject
 
     public virtual bool TryDependableCharge(Vector2 shotPosition){
         if(dependableCharged != null){
-            if(gun.chargeIsReady && gun.counter.EnoughBullets(dependableCharged.Cost)){
+            if(gun.chargeIsReady && gun.counter.EnoughBullets(dependableCharged.Cost - 1)){
                 gun.chargeIsReady = false;
-                dependableCharged.getRef(gun);
-                dependableCharged.CreateBullet(shotPosition);
+                TempDependableCharged = Instantiate(dependableCharged);
+                TempDependableCharged.Cost -= 1;
+                TempDependableCharged.getRef(gun);
+                TempDependableCharged.CreateBullet(shotPosition);
                 return true;
             }
         }

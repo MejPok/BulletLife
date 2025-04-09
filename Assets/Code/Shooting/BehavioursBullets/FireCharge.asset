@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0b84f2a6a74fb44acf6cc6a7cc23d2, type: 3}
   m_Name: FireCharge
   m_EditorClassIdentifier: 
-  Cost: 0
+  Damage: 20
+  Cost: 3
   bulletPrefab: {fileID: 8806096707296727448, guid: 50fda05abf294a74980e91334cfa3fa4, type: 3}
-  dependableCharged: {fileID: 0}
+  dependableCharged: {fileID: 11400000, guid: 00e50747dc9e8c34abd92e4a9fed0a08, type: 2}
   AoeRange: 2
-  AoeDamage: 20
