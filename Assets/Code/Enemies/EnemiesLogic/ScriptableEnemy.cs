@@ -8,4 +8,5 @@ public class ScriptableEnemy : ScriptableObject
     public virtual void MovementLogic(){
 
     }
+    
 }

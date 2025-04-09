@@ -207,3 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6dd8cb6340075429834b4d6759ccf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 20
+  range: 3
+  boomSound: {fileID: 8300000, guid: 01ae2328d10697d4493612fdc93555c4, type: 3}
