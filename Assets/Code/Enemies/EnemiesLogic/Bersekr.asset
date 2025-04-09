@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Bersekr
   m_EditorClassIdentifier: 
   em: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 6d152f4f4ed6da542825ab4561ffaf99, type: 3}
+  - {fileID: 8300000, guid: 118f1a05b9e73714d9289ba7917b3744, type: 3}
