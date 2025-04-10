@@ -38,16 +38,31 @@ public class EnemiesSpawner : MonoBehaviour
         }
 
     }
-    void SpawnEnemy(){
+    GameObject SpawnEnemy(){
 
         int randomPrefab = Random.Range(0, enemiesPrefabs.Length);
         var enemy = Instantiate(enemiesPrefabs[randomPrefab], newRandomPosition(), Quaternion.identity);
         enemy.GetComponent<EnemyHP>().DeathCaller = this;
 
+        CheckForWallOnEnemy(enemy);
+
         enemies.Add(enemy);
 
         enemiesAlive += 1;
         enemiesEver++;
+
+        return enemy;
+    }
+
+    GameObject CheckForWallOnEnemy(GameObject enemy){
+        Collider2D[] collided = Physics2D.OverlapCircleAll((Vector2)enemy.transform.position, 1f);
+        foreach(Collider2D col in collided){
+            if(col.gameObject.tag == "Wall"){
+                Debug.Log("Enemy recreated because of wall");
+                return SpawnEnemy();
+            }
+        }
+        return enemy;
     }
 
     Vector2 newRandomPosition(){

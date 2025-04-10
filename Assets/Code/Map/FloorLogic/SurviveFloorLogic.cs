@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(menuName = "FloorLogic/Survive FloorLogic")]
 public class SurviveFloorLogic : ScriptableFloorLogic
@@ -9,9 +10,10 @@ public class SurviveFloorLogic : ScriptableFloorLogic
     public float timeToSurvive;
     public override void ChangeBehaviour()
     {
-        timeToSurvive = Floor * 25;
+        timeToSurvive = 10 + (Floor * 5);
         spawner.allowNaturalSpawn = true;
-        spawner.SpawningSpeedSeconds = 4 - (float)(Floor * 0.8f);
+        spawner.SpawningSpeedSeconds = Math.Max(0.8F, 5 - (float)(Floor * 0.8f) );
+
         UImanager.uImanager.NewAnnoucment($"Survive for {timeToSurvive} seconds");
     }
 

@@ -291,8 +291,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -631,6 +631,7 @@ MonoBehaviour:
   currentMap: {fileID: 0}
   possibleLogic:
   - {fileID: 11400000, guid: 7a18698e558929f46a04fc06b120f928, type: 2}
+  - {fileID: 11400000, guid: f9e46a56b7db9b041b1386b9ba7d7cf5, type: 2}
 --- !u!114 &334219555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4230,6 +4231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   announcment: {fileID: 33477587}
   TextCounter: {fileID: 1843411146}
+  announcmentQ: []
 --- !u!1 &1746913463
 GameObject:
   m_ObjectHideFlags: 0
