@@ -10,7 +10,7 @@ public class SurviveFloorLogic : ScriptableFloorLogic
     public float timeToSurvive;
     public override void ChangeBehaviour()
     {
-        timeToSurvive = 10 + (Floor * 5);
+        timeToSurvive = 10 + ((Floor % 5) * 5);
         spawner.allowNaturalSpawn = true;
         spawner.SpawningSpeedSeconds = Math.Max(0.8F, 5 - (float)(Floor * 0.8f) );
 

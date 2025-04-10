@@ -115,6 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddec9bf9c39d0144c94912ab10233fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finder: {fileID: 0}
+  canMove: 0
+  EnemyLogic: {fileID: 0}
 --- !u!114 &2362178897404927706
 MonoBehaviour:
   m_ObjectHideFlags: 0

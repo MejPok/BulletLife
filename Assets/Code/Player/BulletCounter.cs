@@ -27,12 +27,16 @@ public class BulletCounter : MonoBehaviour
         }
 
         }
+
     public int MaxBullets;
+    public int bulletsMagazine;
+    public int MaxBulletsMagazine;
 
     public UnityEvent<BulletCounter> BulletsReachedZero;
 
     void Start()
     {
+        bulletsMagazine = MaxBulletsMagazine;
         BulletsLeft = MaxBullets;
         OnBulletsChange();
     }
@@ -49,7 +53,7 @@ public class BulletCounter : MonoBehaviour
     }
 
     public bool EnoughBullets(int amount = 0){
-        return BulletsLeft - amount >= 0;
+        return bulletsMagazine - amount >= 0;
     }
 
     void InvokeCounterEmpty(){

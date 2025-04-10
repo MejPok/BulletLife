@@ -19,6 +19,7 @@ public class ScriptableFloorLogic : ScriptableObject
     public virtual void StartFloor(){
         
         DecidePotentialEnemies();
+        spawner.enemiesPrefabs = additionalEnemies.ToArray();
         ChangeBehaviour();
     }
 
@@ -26,7 +27,7 @@ public class ScriptableFloorLogic : ScriptableObject
         spawner.enemiesMaxAlive = Floor * 15;
         spawner.enemiesMaxSpawned = Floor * 20;
 
-        if(Floor < 3){
+        if(Floor < 2){
             for(int i = 0; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 2; i++){
                 additionalEnemies.Add(TowerManager.instance.allPossibleEnemiesBasedOnDifficulty[i]);
             }
@@ -34,14 +35,20 @@ public class ScriptableFloorLogic : ScriptableObject
         }
 
         if( Floor < 5){
-            for(int i = 0; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 3; i++){
+            for(int i = 1; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 4; i++){
                 additionalEnemies.Add(TowerManager.instance.allPossibleEnemiesBasedOnDifficulty[i]);
             }
             return;
         }
 
         if( Floor < 7){
-            for(int i = 0; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 4; i++){
+            for(int i = 2; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 6; i++){
+                additionalEnemies.Add(TowerManager.instance.allPossibleEnemiesBasedOnDifficulty[i]);
+            }
+            return;
+        }
+        if( Floor < 10){
+            for(int i = 4; i < TowerManager.instance.allPossibleEnemiesBasedOnDifficulty.Length && i < 8; i++){
                 additionalEnemies.Add(TowerManager.instance.allPossibleEnemiesBasedOnDifficulty[i]);
             }
             return;
