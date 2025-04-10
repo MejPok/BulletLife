@@ -8,6 +8,8 @@ public class EnemyHP : MonoBehaviour
     int HP;
     NotificationSender sender;
 
+    public EnemiesSpawner DeathCaller { get; set; }
+
     void Start()
     {
         MaxHP = (int)GetComponent<EnemyStats>().baseHP;
@@ -35,7 +37,7 @@ public class EnemyHP : MonoBehaviour
         if(Random.Range(0, 100) >= 70) bulletDrop++;
         
         GlobalManager.Instance.Gun.GetComponent<BulletCounter>().Add(bulletDrop);
-
+        DeathCaller.EnemyDown();
         Destroy(gameObject);
     }
 
