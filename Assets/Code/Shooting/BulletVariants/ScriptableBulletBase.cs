@@ -19,7 +19,7 @@ public class ScriptableBulletBase : ScriptableObject
 
     public virtual bool TryDependableCharge(Vector2 shotPosition){
         if(dependableCharged != null){
-            if(gun.chargeIsReady && gun.counter.EnoughBullets(dependableCharged.Cost - 1)){
+            if(gun.chargeIsReady && gun.counter.EnoughBulletsInMagazine(dependableCharged.Cost - 1)){
                 gun.chargeIsReady = false;
                 TempDependableCharged = Instantiate(dependableCharged);
                 TempDependableCharged.Cost -= 1;
@@ -43,6 +43,14 @@ public class ScriptableBulletBase : ScriptableObject
     public virtual void OnJoyStickShot(InputAction.CallbackContext callback)
     {
         throw new System.NotImplementedException();
+    }
+
+    public virtual bool GotEnoughBulletsForMe(){
+        if(!gun.counter.EnoughBulletsInMagazine(Cost)){
+            gun.trajectory.EndLine();
+            return false;
+        }
+        return true;
     }
 
 

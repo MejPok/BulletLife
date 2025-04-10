@@ -49,7 +49,7 @@ public class PlayerGun : MonoBehaviour
     }
 
     void Aim(UnityEngine.InputSystem.InputAction.CallbackContext context){
-        if(!counter.EnoughBullets()){
+        if(!counter.EnoughBulletsInMagazine()){
             trajectory.EndLine();
             return;
         }

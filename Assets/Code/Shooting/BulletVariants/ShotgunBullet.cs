@@ -10,10 +10,7 @@ public class ShotgunBullet : ScriptableBulletBase
     float AngleDifference;
     public override void CreateBullet(Vector2 shotPosition)
     {
-        if(!gun.counter.EnoughBullets(Cost)){
-            gun.trajectory.EndLine();
-            return;
-        }
+        if (!GotEnoughBulletsForMe()) return;
 
         if(TryDependableCharge(shotPosition)){
             return;

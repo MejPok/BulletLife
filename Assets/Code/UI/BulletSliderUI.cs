@@ -13,20 +13,16 @@ public class BulletSliderUI : MonoBehaviour
     void Start()
     {
         bulletSlider = GetComponent<Slider>();
-        counter = GlobalManager.Instance.Gun.GetComponent<BulletCounter>();
-
-        bulletSlider.maxValue = counter.MaxBullets;
-        bulletSlider.value = counter.BulletsLeft;
     }
 
     public void UpdateBulletCount()
     {
-        bulletSlider.maxValue = counter.MaxBullets;
-        bulletSlider.value = counter.BulletsLeft;
+        counter = GlobalManager.Instance.Gun.GetComponent<BulletCounter>();
+        bulletSlider.maxValue = counter.MaxBulletsMagazine;
+        bulletSlider.value = counter.bulletsMagazine;
     }
     void Update()
     {
-        counter = GlobalManager.Instance.Gun.GetComponent<BulletCounter>();
         UpdateBulletCount();
     }
 }
