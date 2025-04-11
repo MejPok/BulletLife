@@ -34,9 +34,12 @@ public class EnemyHP : MonoBehaviour
         SoundManager.Instance.PlaySoundFX(GetComponent<FXchoser>().audioClips[1], transform, 1);
 
         int bulletDrop = (int)GetComponent<EnemyStats>().bulletDrop;
+
         if(Random.Range(0, 100) >= 70) bulletDrop++;
         
         GlobalManager.Instance.Gun.GetComponent<BulletCounter>().Add(bulletDrop);
+        Debug.Log("Dropping " + bulletDrop + " ammo");
+
         DeathCaller.EnemyDown();
         Destroy(gameObject);
     }

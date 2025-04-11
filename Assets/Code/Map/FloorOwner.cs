@@ -5,7 +5,7 @@ using UnityEngine;
 public class FloorOwner : MonoBehaviour
 {
     [SerializeReference]public ScriptableFloorLogic floorLogic;
-
+    bool EverythingDone;
     void Start()
     {
         floorLogic.Floor = TowerManager.instance.Floor;
@@ -21,9 +21,12 @@ public class FloorOwner : MonoBehaviour
     void Update()
     {
 
-        if(floorLogic.ConditionReached()){
+        if(floorLogic.ConditionReached() && !EverythingDone){
             Debug.Log("Floor Done");
+            UImanager.uImanager.NewAnnoucment("Floor " + floorLogic.Floor + " completed");
+
             TowerManager.instance.NextFloor();
+            EverythingDone = true;
         }
         
     }

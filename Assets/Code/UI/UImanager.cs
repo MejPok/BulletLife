@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
 using TMPro;
+using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UImanager : MonoBehaviour
 {
@@ -34,6 +36,7 @@ public class UImanager : MonoBehaviour
                 announcment.text = "";
             }
         }
+
         
     }
 
@@ -41,6 +44,12 @@ public class UImanager : MonoBehaviour
         AnnouncmentTimer = 0;
         announcmentQ.Add(text);
         announcment.text = text;
+    }
+
+    public Animator panel;
+
+    public void BlackScreen(){
+        panel.SetTrigger("blacksreen");
     }
 
 

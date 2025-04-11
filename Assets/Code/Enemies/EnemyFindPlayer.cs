@@ -20,16 +20,13 @@ public class EnemyFindPlayer : MonoBehaviour
         
         if(hit){
             if(hit.collider.gameObject.CompareTag("Wall")){
-                Debug.Log("" + hit.collider.gameObject.name);
                 return;
             }
 
             if(hit.collider.gameObject.CompareTag("Player")){
                 PlayerFound();
+                Debug.Log("" + hit.collider.gameObject.name);
             }
-            
-            
-            Debug.Log("" + hit.collider.gameObject.name);
 
         }
 

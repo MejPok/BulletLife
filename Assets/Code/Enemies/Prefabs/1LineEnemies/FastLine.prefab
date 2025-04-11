@@ -94,7 +94,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -695006819611984, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: baseHP
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -695006819611984, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: baseSpeed

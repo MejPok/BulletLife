@@ -214,7 +214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -695006819611984, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: baseHP
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -695006819611984, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: warnTime
@@ -242,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5079427874376490002, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: m_Name
-      value: ShieldEnemy Variant 1
+      value: ShieldLine
       objectReference: {fileID: 0}
     - target: {fileID: 5787711352703435932, guid: 842d0d4069fc95e429fb0de2f49d8ba3, type: 3}
       propertyPath: m_LocalPosition.x

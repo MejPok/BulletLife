@@ -43,4 +43,8 @@ public class FloorManager : MonoBehaviour
         
         return map;
     }
+
+    public void DeleteFloor(){
+        Destroy(currentMap);
+    }
 }

@@ -12,17 +12,21 @@ public class BulletCounter : MonoBehaviour
     [SerializeField] public int BulletsLeft { 
         get
         { 
-
+            
             return bulletsLeft; 
         } 
         set {
-            if(value < 0){
+            OnBulletsChange();
+            bulletsLeft = value;
+
+            if(value <= 0 || bulletsLeft <= 0){
                  bulletsLeft = 0; 
-                InvokeCounterEmpty();
+                 if(!EnoughBulletsSum()){
+                    InvokeCounterEmpty();
+                 }
+                 OnBulletsChange();
                  return;
             }
-
-            bulletsLeft = value;
             OnBulletsChange();
         }
 
@@ -42,23 +46,53 @@ public class BulletCounter : MonoBehaviour
     }
     
     public void DecreaseBullets(int amount){
-        bulletsMagazine -= amount;
+        if(bulletsMagazine <= 0){
+            BulletsLeft -= amount;
+        } else {
+            bulletsMagazine -= amount;
+        }
+        
         SoundManager.Instance.PlaySoundFX(GetComponent<FXchoser>().audioClips[1], transform, 1);
-        Debug.Log("player hit");
 
         if(!EnoughBulletsSum()) InvokeCounterEmpty();
         
+        OnBulletsChange();
     }
 
     public bool EnoughBulletsInMagazine(int amount = 0){
         return bulletsMagazine - amount >= 0;
     }
     public bool EnoughBulletsSum(int amount = 0){
-        return bulletsMagazine + BulletsLeft - amount >= 0;
+        return bulletsMagazine + BulletsLeft - amount > 0;
     }
 
     void InvokeCounterEmpty(){
         BulletsReachedZero.Invoke(this);
+        if(newlifeChance == false){
+            newlifeChance = true;
+        }
+        
+    }
+    bool newlifeChance;
+    float timer;
+
+    void Update()
+    {
+        if(newlifeChance == false){
+            if(!EnoughBulletsSum()){
+                InvokeCounterEmpty();
+            }
+        }
+        if(newlifeChance){
+            timer += Time.deltaTime;
+            if(timer > 2f){
+                newlifeChance = false;
+                TowerManager.instance.LeaveTower();
+                bulletsLeft = MaxBullets;
+                bulletsMagazine = MaxBulletsMagazine;
+            }
+        }
+        
     }
     void OnBulletsChange(){
         UImanager.uImanager.UpdateCounterText(BulletsLeft);
@@ -70,27 +104,32 @@ public class BulletCounter : MonoBehaviour
             return;
         }
         BulletsLeft += amount;
+        newlifeChance = false;
     }
 
     public void ReloadToMagazine(int amount){
         Debug.Log("trying to reload " + amount);
+        
         if(amount > BulletsLeft){
             amount = BulletsLeft;
+            
         }
 
         if(bulletsMagazine + amount <= MaxBulletsMagazine && BulletsLeft - amount >= 0){
             bulletsMagazine += amount;
             BulletsLeft -= amount;
+            return;
         }
 
         int difference = MaxBulletsMagazine - bulletsMagazine;
 
         if(difference <= amount && difference <= BulletsLeft){
-            BulletsLeft -= difference;
             bulletsMagazine += difference;
+            BulletsLeft -= difference;
+            
 
         }
-
+        OnBulletsChange();
         
         
 

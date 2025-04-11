@@ -10,8 +10,8 @@ public class KillEnemiesFloor : ScriptableFloorLogic
     public int enemiesKilled;
     public override void ChangeBehaviour()
     {
-        spawner.SpawningSpeedSeconds = Math.Max(1, 5 - (float)(Floor * 0.2f) );
-        enemiesToKill = 10 + (int)(Floor % 5 * 5);
+        spawner.SpawningSpeedSeconds = Math.Max(1, 4 - (float)(Floor * 0.2f) );
+        enemiesToKill = 5 + (int)(Floor % 5 * 5);
 
         spawner.allowNaturalSpawn = false;
         spawner.enemiesMaxSpawned = enemiesToKill * 2;

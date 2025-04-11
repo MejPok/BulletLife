@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void MoveMyPlayer(Vector2 direction)
     {
-        if (counter != null && counter.BulletsLeft > 0)
+        if (counter != null && counter.EnoughBulletsSum())
             canMove = true;
 
         if (canMove)

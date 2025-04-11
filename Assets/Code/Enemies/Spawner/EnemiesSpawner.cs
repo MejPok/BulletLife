@@ -85,6 +85,10 @@ public class EnemiesSpawner : MonoBehaviour
 
     void OnDestroy()
     {
+        DestroyAllEnemies();
+    }
+
+    public void DestroyAllEnemies(){
         foreach(GameObject enemy in enemies){
             Destroy(enemy);
         }

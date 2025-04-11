@@ -12,7 +12,7 @@ public class SurviveFloorLogic : ScriptableFloorLogic
     {
         timeToSurvive = 10 + ((Floor % 5) * 5);
         spawner.allowNaturalSpawn = true;
-        spawner.SpawningSpeedSeconds = Math.Max(0.8F, 5 - (float)(Floor * 0.8f) );
+        spawner.SpawningSpeedSeconds = Math.Max(0.8F, 4 - (float)(Floor * 0.5f) );
 
         UImanager.uImanager.NewAnnoucment($"Survive for {timeToSurvive} seconds");
     }
