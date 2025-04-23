@@ -6,6 +6,8 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set;}
     public AudioSource soundFXobject;
+
+    public AudioClip[] audioClipsSaved;
     void Awake()
     {
         Instance = this;
@@ -21,5 +23,9 @@ public class SoundManager : MonoBehaviour
         float clipLength = soundFX.clip.length;
 
         Destroy(soundFX.gameObject, clipLength);
+    }
+
+    public void PlaySoundFXnoAmmo(){
+        PlaySoundFX(audioClipsSaved[0], transform, 1);
     }
 }

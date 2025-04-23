@@ -27,6 +27,9 @@ public class ScriptableBulletBase : ScriptableObject
                 TempDependableCharged.CreateBullet(shotPosition);
                 return true;
             }
+            if(!gun.counter.EnoughBulletsInMagazine(dependableCharged.Cost - 1)){
+                SoundManager.Instance.PlaySoundFXnoAmmo();
+            }
         }
         return false;
     }
@@ -47,6 +50,7 @@ public class ScriptableBulletBase : ScriptableObject
 
     public virtual bool GotEnoughBulletsForMe(){
         if(!gun.counter.EnoughBulletsInMagazine(Cost)){
+            SoundManager.Instance.PlaySoundFXnoAmmo();
             gun.trajectory.EndLine();
             return false;
         }

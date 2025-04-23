@@ -2871,6 +2871,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXobject: {fileID: 1427957124455716191, guid: e9e7bc8ae03666d488cc7405845b6541, type: 3}
+  audioClipsSaved:
+  - {fileID: 8300000, guid: 74059f34473e94347bc3a57854a78bb7, type: 3}
 --- !u!114 &976670467
 MonoBehaviour:
   m_ObjectHideFlags: 0
