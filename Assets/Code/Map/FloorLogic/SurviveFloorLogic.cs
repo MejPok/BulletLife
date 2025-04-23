@@ -10,7 +10,7 @@ public class SurviveFloorLogic : ScriptableFloorLogic
     public float timeToSurvive;
     public override void ChangeBehaviour()
     {
-        timeToSurvive = 10 + ((Floor % 5) * 5);
+        timeToSurvive = 25 + ((Floor % 3) * 5);
         spawner.allowNaturalSpawn = true;
         spawner.SpawningSpeedSeconds = Math.Max(0.8F, 4 - (float)(Floor * 0.5f) );
 
@@ -19,6 +19,8 @@ public class SurviveFloorLogic : ScriptableFloorLogic
 
     public override bool ConditionReached()
     {
+        float remainingTime = (timeToSurvive - timeAlive);
+        UImanager.uImanager.DifferentObjective("Survive for " + (int)remainingTime + "s");
         timeAlive += Time.deltaTime;
         return timeAlive >= timeToSurvive;
     }

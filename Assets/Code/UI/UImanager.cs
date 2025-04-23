@@ -50,6 +50,9 @@ public class UImanager : MonoBehaviour
     public void BlackScreen(){
         panel.SetTrigger("blacksreen");
     }
-
+    public TextMeshProUGUI objective;
+    public void DifferentObjective(string obj){
+        objective.text = obj;
+    }
 
 }

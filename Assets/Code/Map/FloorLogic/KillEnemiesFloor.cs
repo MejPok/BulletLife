@@ -11,7 +11,7 @@ public class KillEnemiesFloor : ScriptableFloorLogic
     public override void ChangeBehaviour()
     {
         spawner.SpawningSpeedSeconds = Math.Max(1, 4 - (float)(Floor * 0.2f) );
-        enemiesToKill = 5 + (int)(Floor % 5 * 5);
+        enemiesToKill = 10 + (int)(Floor % 3 * 2);
 
         spawner.allowNaturalSpawn = false;
         spawner.enemiesMaxSpawned = enemiesToKill * 2;
@@ -21,6 +21,7 @@ public class KillEnemiesFloor : ScriptableFloorLogic
     public override bool ConditionReached()
     {
         enemiesKilled = (spawner.enemiesEver - spawner.enemiesAlive);
+        UImanager.uImanager.DifferentObjective("Kill " + (enemiesToKill - enemiesKilled) + " enemies");
         return enemiesKilled >= enemiesToKill;
     }
 }

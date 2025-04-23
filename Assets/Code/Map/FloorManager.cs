@@ -38,7 +38,7 @@ public class FloorManager : MonoBehaviour
      }
 
     GameObject ChooseRandomMap(){
-        var map = Instantiate(mapPool[0], manager.LevelLocation, Quaternion.identity);
+        var map = Instantiate(mapPool[UnityEngine.Random.Range(0, mapPool.Count)], manager.LevelLocation, Quaternion.identity);
         map.GetComponent<FloorOwner>().floorLogic = Instantiate(possibleLogic[UnityEngine.Random.Range(0, possibleLogic.Count)]);
         
         return map;
